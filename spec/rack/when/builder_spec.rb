@@ -1,6 +1,9 @@
 require 'rack/when/builder'
 
 describe 'An environment sensitive rack builder' do
+  before do
+    stub_const("ENV",{})
+  end
 
   describe '#mount rack_up' do
     let(:builder)       { Rack::When::Builder.new @env, block }
