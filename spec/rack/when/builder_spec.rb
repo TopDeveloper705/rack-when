@@ -3,8 +3,8 @@ require 'rack/when/builder'
 describe 'An environment sensitive rack builder' do
 
   describe '#mount rack_up' do
-    let(:builder)       { Rack::When::Builder.new @env, &block }
-    let(:block)         { -> {} }
+    let(:builder)       { Rack::When::Builder.new @env, block }
+    let(:block)         { double "block" }
     let(:mount_builder) { builder.mount }
 
     it 'will run the block when enviroment matches' do
@@ -34,18 +34,18 @@ describe 'An environment sensitive rack builder' do
   describe '#current_env_matches?' do
     shared_examples_for 'matching environment' do
       it 'is true when matched' do
-        expect(Rack::When::Builder.new :development ).to have_matching_env
-        expect(Rack::When::Builder.new 'development').to have_matching_env
-        expect(Rack::When::Builder.new 'DeVelopment').to have_matching_env
+        expect(Rack::When::Builder.new :development,  double ).to have_matching_env
+        expect(Rack::When::Builder.new 'development', double ).to have_matching_env
+        expect(Rack::When::Builder.new 'DeVelopment', double ).to have_matching_env
       end
 
       it 'is true when matched as partial' do
-        expect(Rack::When::Builder.new :dev ).to have_matching_env
-        expect(Rack::When::Builder.new 'dev').to have_matching_env
+        expect(Rack::When::Builder.new :dev,  double ).to have_matching_env
+        expect(Rack::When::Builder.new 'dev', double ).to have_matching_env
       end
 
       it 'is false when mismatched' do
-        expect(Rack::When::Builder.new :staging).to_not have_matching_env
+        expect(Rack::When::Builder.new :staging, double ).to_not have_matching_env
       end
     end
 

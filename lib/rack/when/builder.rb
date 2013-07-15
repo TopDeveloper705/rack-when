@@ -2,7 +2,7 @@ module Rack
   module When
     class Builder
 
-      def initialize env, &block
+      def initialize env, block
         @env, @block = env, block
       end
 
