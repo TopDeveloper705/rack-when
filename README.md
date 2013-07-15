@@ -1,10 +1,38 @@
 # Rack::When
 
-TODO: Write a gem description
+Shortcut handler for performing tasks in specific environments. Specific
+environments can be set to run specific sections of code. I wrote this
+to handle rack-middleware and as such it works in a `config.ru` but you
+could use it to run anything.
+
+The order of precedence for env is `ENV['RACK_ENV']` or `ENV['RAILS_ENV']`
+but it defaults to `development`.
 
 ## Usage
 
-TODO: Write usage instructions here
+In your `config.ru` do
+
+```Ruby
+Rack::When.development do
+  # Things you want done in development
+  use DevelopmentMiddleware
+end
+
+Rack::When.production do
+  # Things you want done in production
+  use ProductionMetricMaker
+end
+
+run MyApplication
+```
+
+You can also specify the enviroment directly if you would prefer:
+
+```Ruby
+Rack::When.environment :custom_env do
+  # My custom env code
+end
+```
 
 ## Installation
 
