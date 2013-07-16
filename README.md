@@ -1,4 +1,4 @@
-# Rack::When
+# Rack::When [![Build Status](https://secure.travis-ci.org/rack/rack-when.png?branch=master)](http://travis-ci.org/rack/rack-when) [![Code Climate](https://codeclimate.com/github/JonRowe/rack-when.png)](https://codeclimate.com/github/JonRowe/rack-when)
 
 Shortcut handler for performing tasks in specific environments. Specific
 environments can be set to run specific sections of code. I wrote this
