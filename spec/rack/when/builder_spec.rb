@@ -67,5 +67,12 @@ describe 'An environment sensitive rack builder' do
     context 'environment not set' do
       it_should_behave_like 'matching environment'
     end
+
+    it 'matches when one of multiple envs match' do
+      ENV['RACK_ENV'] = 'custom'
+      expect(Rack::When::Builder.new :dev,    :custom, double ).to have_matching_env
+      expect(Rack::When::Builder.new :custom, :test,   double ).to have_matching_env
+      expect(Rack::When::Builder.new :dev,    :test,   double ).to_not have_matching_env
+    end
   end
 end

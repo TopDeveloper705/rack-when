@@ -29,7 +29,15 @@ run MyApplication
 You can also specify the enviroment directly if you would prefer:
 
 ```Ruby
-Rack::When.environment :custom_env do
+Rack::When.environments :custom_env do
+  # My custom env code
+end
+```
+
+and with multiple environments:
+
+```Ruby
+Rack::When.environments :custom_env, :another_custom_env do
   # My custom env code
 end
 ```

@@ -2,8 +2,8 @@ module Rack
   module When
     class Builder
 
-      def initialize env, block
-        @env, @block = env, block
+      def initialize *args
+        *@envs, @block = args
       end
 
       def mount
@@ -11,7 +11,7 @@ module Rack
       end
 
       def has_matching_env?
-        (ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development') =~ /^#{@env.to_s.downcase}/
+        @envs.any? { |env| (ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development') =~ /^#{env.to_s.downcase}/ }
       end
 
     end

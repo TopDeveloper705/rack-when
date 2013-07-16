@@ -22,6 +22,10 @@ module Rack
         environment :production, &block
       end
 
+      def environments *environments, &block
+        Builder.new(*environments,block).mount
+      end
+
       def environment environment, &block
         Builder.new(environment,block).mount
       end

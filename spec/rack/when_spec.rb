@@ -23,15 +23,28 @@ describe 'setting up for environments' do
 
     context "explicit #{env}" do
       it 'sets up a builder with the environment and the current context as rackup' do
-        Rack::When.environment env, &(block = -> { })
+        Rack::When.environments env, &(block = -> { })
         expect(Rack::When::Builder).to have_received(:new).with(env.to_sym,block)
       end
 
       it 'mounts the builder with caller as rackup' do
-        Rack::When.environment(env) { }
+        Rack::When.environments(env) { }
         expect(builder).to have_received(:mount)
       end
     end
 
   end
+
+  context "mutiple envs" do
+    it 'sets up a builder with the environments and the current context as rackup' do
+      Rack::When.environments :one, :two, &(block = -> { })
+      expect(Rack::When::Builder).to have_received(:new).with(:one, :two, block)
+    end
+
+    it 'mounts the builder with caller as rackup' do
+      Rack::When.environments(:one, :two) { }
+      expect(builder).to have_received(:mount)
+    end
+  end
+
 end
