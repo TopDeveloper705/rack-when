@@ -21,7 +21,11 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "rack"
 
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
+  if RUBY_VERSION.to_f >= 2
+    spec.add_development_dependency "rake", '~> 11.0'
+  else
+    spec.add_development_dependency "rake", '~> 10.0'
+  end
   spec.add_development_dependency "rspec"
 
 end
