@@ -28,8 +28,10 @@ Gem::Specification.new do |spec|
 
   if RUBY_VERSION.to_f < 2
     spec.add_development_dependency "rake", '~> 10.0'
-  else
+  elsif RUBY_VERSION.to_f < 2.2
     spec.add_development_dependency "rake", '~> 12.0'
+  else
+    spec.add_development_dependency "rake", '~> 13.0'
   end
   spec.add_development_dependency "rspec"
 
